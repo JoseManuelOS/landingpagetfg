@@ -1,0 +1,33 @@
+// FlatMate editorial light palette (portfolio-inspired)
+:root {
+  // Backgrounds — warm beige editorial
+  --color-bg: #f5efe6;
+  --color-bg-soft: #faf6ef;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #fffefa;
+
+  // Text
+  --color-text: #1a1815;
+  --color-text-dim: #5e564c;
+  --color-text-mute: #8b8377;
+  --color-text-inverse: #faf6ef;
+
+  // Brand accents
+  --color-indigo: #4338ca;
+  --color-indigo-soft: rgba(67, 56, 202, 0.14);
+  --color-cyan: #0891b2;
+  --color-cyan-soft: rgba(8, 145, 178, 0.14);
+  --color-green: #047857;
+  --color-green-soft: rgba(4, 120, 87, 0.14);
+  --color-amber: #b45309;
+  --color-amber-soft: rgba(180, 83, 9, 0.14);
+
+  // Heavy
+  --color-navy: #0f172a;
+  --color-navy-soft: rgba(15, 23, 42, 0.08);
+
+  // Lines / borders
+  --color-border: rgba(26, 24, 21, 0.10);
+  --color-border-strong: rgba(26, 24, 21, 0.18);
+  --color-border-line: #1a1815;
+}

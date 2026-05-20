@@ -1,0 +1,171 @@
+@use './variables' as v;
+
+// Color-block backgrounds per section (full editorial blocks)
+.section--problem {
+  background: var(--color-bg);
+}
+
+.section--finance {
+  background: var(--color-bg-soft);
+}
+
+.section--tasks {
+  background: var(--color-bg);
+}
+
+.section--ai {
+  background: var(--color-navy);
+  color: var(--color-text-inverse);
+
+  .eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .eyebrow::before {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .heading-lg,
+  .heading-md,
+  h2,
+  h3 {
+    color: #fff;
+  }
+  .lead {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .section-marker {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .section-marker__num {
+    color: #fff;
+  }
+}
+
+.section--security {
+  background: var(--color-bg-soft);
+}
+
+.section--showcase {
+  background: var(--color-bg);
+}
+
+.section--cta {
+  background: var(--color-navy);
+  color: var(--color-text-inverse);
+
+  .eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Big banner full-width strip
+.section-banner {
+  position: relative;
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  padding-block: v.$space-md;
+  overflow: hidden;
+  border-block: 1.5px solid var(--color-border-line);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: v.$space-2xl;
+    transform: rotate(-1deg);
+    transform-origin: center;
+    white-space: nowrap;
+    font-family: v.$font-display;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent, currentColor);
+    flex-shrink: 0;
+  }
+
+  // Variant: scaleX reveal background
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--color-indigo);
+    transform-origin: left center;
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &--indigo {
+    --accent: #818cf8;
+  }
+  &--cyan {
+    --accent: #22d3ee;
+  }
+  &--amber {
+    --accent: #f59e0b;
+  }
+  &--green {
+    --accent: #10b981;
+  }
+}
+
+// Marquee infinite strip
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border-block: 1.5px solid var(--color-border-line);
+  background: var(--color-bg);
+  padding-block: v.$space-sm;
+
+  &__track {
+    display: inline-flex;
+    gap: v.$space-2xl;
+    align-items: center;
+    animation: marquee-scroll 35s linear infinite;
+    white-space: nowrap;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: v.$space-md;
+    font-family: v.$font-display;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-indigo);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+}

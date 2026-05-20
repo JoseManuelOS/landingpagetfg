@@ -1,0 +1,187 @@
+@use './colors';
+@use './reset';
+@use './sections';
+@use './variables' as v;
+
+body {
+  font-family: v.$font-sans;
+  font-size: v.$fs-md;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role='button'] {
+    cursor: none;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: v.$container-max;
+  margin: 0 auto;
+  padding-inline: v.$container-pad;
+}
+
+.section {
+  position: relative;
+  padding-block: v.$space-4xl;
+  overflow: visible;
+
+  @media (max-width: v.$bp-md) {
+    padding-block: v.$space-3xl;
+  }
+}
+
+.eyebrow {
+  font-family: v.$font-mono;
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--color-text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-xs;
+
+  &::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--color-text);
+  }
+}
+
+.section-marker {
+  font-family: v.$font-mono;
+  font-size: v.$fs-xs;
+  color: var(--color-text-mute);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
+  gap: v.$space-sm;
+
+  &__num {
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: v.$fs-sm;
+  }
+}
+
+.heading-display {
+  font-family: v.$font-display;
+  font-weight: 900;
+  font-size: v.$fs-display;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+}
+
+.heading-display-sm {
+  font-family: v.$font-display;
+  font-weight: 900;
+  font-size: v.$fs-display-sm;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+}
+
+.heading-xl {
+  font-family: v.$font-display;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}
+
+.heading-lg {
+  font-family: v.$font-display;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+}
+
+.heading-md {
+  font-family: v.$font-display;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.lead {
+  font-size: clamp(v.$fs-md, 1.6vw, v.$fs-lg);
+  color: var(--color-text-dim);
+  max-width: 56ch;
+  line-height: 1.55;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-xs;
+  padding: v.$space-sm v.$space-lg;
+  border-radius: v.$radius-pill;
+  font-family: v.$font-mono;
+  font-size: v.$fs-xs;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1.5px solid var(--color-border-line);
+  background: transparent;
+  color: var(--color-text);
+  transition: transform 220ms v.$ease-out, background 220ms, color 220ms;
+
+  &:hover {
+    transform: translate(2px, -2px);
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+  }
+
+  &.button--primary {
+    background: var(--color-text);
+    color: var(--color-text-inverse);
+    border-color: var(--color-text);
+
+    &:hover {
+      background: var(--color-indigo);
+      border-color: var(--color-indigo);
+    }
+  }
+
+  &.button--ghost {
+    border-color: transparent;
+
+    &:hover {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-border-line);
+    }
+  }
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2xs;
+  padding: v.$space-2xs v.$space-sm;
+  border-radius: v.$radius-pill;
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  font-family: v.$font-mono;
+  font-size: v.$fs-xs;
+  color: var(--color-text-dim);
+  letter-spacing: 0.06em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
