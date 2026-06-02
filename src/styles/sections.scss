@@ -6,6 +6,10 @@
 }
 
 .section--finance {
+  position: relative;
+  z-index: 2;
+  margin-top: -24vh;
+  padding-top: calc(24vh + #{v.$space-4xl});
   background: var(--color-bg-soft);
 }
 

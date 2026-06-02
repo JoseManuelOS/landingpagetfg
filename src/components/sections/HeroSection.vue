@@ -1,74 +1,139 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, useTemplateRef } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 import gsap from 'gsap'
 import inicioUrl from '@/assets/flatmate/screen_inicio.png'
-import { useReducedMotion } from '@/composables/useReducedMotion'
-import { useThreeScene } from '@/composables/useThreeScene'
 
 const root = useTemplateRef<HTMLElement>('root')
-const threeCanvas = useTemplateRef<HTMLCanvasElement>('threeCanvas')
-const { prefers } = useReducedMotion()
-const sceneEnabled = computed(() => !prefers.value)
-const { ready: sceneReady } = useThreeScene({ canvas: threeCanvas, enabled: sceneEnabled })
-const showFallback = computed(() => !sceneEnabled.value || !sceneReady.value)
-let context: gsap.Context | null = null
+const phone = useTemplateRef<HTMLElement>('phone')
+let ctx: gsap.Context | null = null
 
 onMounted(() => {
-  context = gsap.context(() => {
-    const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } })
-    timeline
-      .from('.hero__eyebrow', { autoAlpha: 0, y: 16, duration: 0.55 })
-      .from('.hero__title-line', { autoAlpha: 0, yPercent: 70, duration: 0.9, stagger: 0.1 }, '-=0.25')
-      .from('.hero__claim', { autoAlpha: 0, y: 22, duration: 0.6 }, '-=0.42')
-      .from('.hero__actions > *', { autoAlpha: 0, y: 18, duration: 0.5, stagger: 0.08 }, '-=0.32')
-      .from('.hero__stage', { autoAlpha: 0, y: 60, scale: 0.9, duration: 1.15 }, '-=0.25')
-      .from('.hero__signal', { autoAlpha: 0, y: 12, duration: 0.45, stagger: 0.1 }, '-=0.5')
-      .from('.hero__scroll', { autoAlpha: 0, duration: 0.45 }, '-=0.15')
+  ctx = gsap.context(() => {
+    // Entry timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    tl.from('.hero__badge', { autoAlpha: 0, y: 12, duration: 0.5 })
+      .from('.hero__title-line', { autoAlpha: 0, yPercent: 100, duration: 0.85, stagger: 0.1 }, '-=0.2')
+      .from('.hero__claim', { autoAlpha: 0, y: 20, duration: 0.6 }, '-=0.4')
+      .from('.hero__actions > *', { autoAlpha: 0, y: 16, duration: 0.45, stagger: 0.09 }, '-=0.35')
+      .from('.hero__tech > *', { autoAlpha: 0, y: 10, duration: 0.4, stagger: 0.06 }, '-=0.3')
+      .from('.hero__phone-wrap', { autoAlpha: 0, x: 48, duration: 0.9, ease: 'power2.out' }, 0.15)
+      .from('.hero__float', { autoAlpha: 0, y: 18, scale: 0.92, duration: 0.55, stagger: 0.12, ease: 'back.out(1.6)' }, '-=0.45')
+      .from('.hero__scroll', { autoAlpha: 0, duration: 0.4 }, '-=0.1')
+
+    // Idle phone rock (sine yoyo)
+    gsap.to(phone.value, {
+      rotateY: 6,
+      rotateX: -2,
+      duration: 4.5,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1,
+    })
+
+    // Float cards bob independently
+    gsap.to('.hero__float--tl', { y: -9, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 })
+    gsap.to('.hero__float--tr', { y: 10, duration: 3.8, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.7 })
+    gsap.to('.hero__float--bl', { y: -7, duration: 4.1, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.2 })
+    gsap.to('.hero__float--br', { y: 8, duration: 3.5, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.4 })
   }, root.value ?? undefined)
 })
 
-onUnmounted(() => context?.revert())
+onUnmounted(() => ctx?.revert())
 </script>
 
 <template>
   <section id="hero" ref="root" class="hero section--hero" data-section="hero">
-    <div class="hero__top">
-      <p class="hero__eyebrow">FlatMate <span>TFG 2026</span></p>
-      <h1 class="hero__title">
-        <span class="hero__title-mask"><span class="hero__title-line">Compartir piso.</span></span>
-        <span class="hero__title-mask">
-          <span class="hero__title-line hero__title-line--light">Sin el caos.</span>
+    <div class="hero__bg" aria-hidden="true">
+      <span class="hero__bg-orb hero__bg-orb--a" />
+      <span class="hero__bg-orb hero__bg-orb--b" />
+      <span class="hero__bg-orb hero__bg-orb--c" />
+    </div>
+
+    <div class="hero__layout">
+      <!-- LEFT: copy -->
+      <div class="hero__copy">
+        <span class="hero__badge">
+          <span class="hero__badge-dot" />
+          FlatMate · TFG 2026
         </span>
-      </h1>
-      <p class="hero__claim">
-        Finanzas, tareas e inteligencia para gestionar un hogar compartido.
-      </p>
-      <div class="hero__actions">
-        <a href="#story" class="button button--primary">Descubrir FlatMate</a>
-        <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button">Memoria TFG</a>
+
+        <h1 class="hero__title">
+          <span class="hero__title-mask"><span class="hero__title-line">Compartir</span></span>
+          <span class="hero__title-mask"><span class="hero__title-line">piso.</span></span>
+          <span class="hero__title-mask">
+            <span class="hero__title-line hero__title-line--grad">Sin el caos.</span>
+          </span>
+        </h1>
+
+        <p class="hero__claim">
+          Finanzas, tareas e inteligencia artificial para gestionar un hogar compartido desde un solo lugar.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#story" class="button button--primary">Descubrir FlatMate</a>
+          <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button hero__btn-ghost">
+            Memoria TFG
+          </a>
+        </div>
+
+        <ul class="hero__tech" aria-label="Stack tecnológico">
+          <li>Flutter</li>
+          <li>Supabase</li>
+          <li>IA + OCR</li>
+          <li>Stripe</li>
+          <li>Firebase</li>
+        </ul>
+      </div>
+
+      <!-- RIGHT: phone + floating cards -->
+      <div class="hero__visual">
+        <div class="hero__phone-wrap" style="perspective: 1200px">
+          <!-- Floating cards OUTSIDE the phone -->
+          <div class="hero__float hero__float--tl" aria-hidden="true">
+            <span class="hero__float-icon">✓</span>
+            <div class="hero__float-body">
+              <strong>11 tareas</strong>
+              <span>completadas hoy</span>
+            </div>
+          </div>
+
+          <div class="hero__float hero__float--tr" aria-hidden="true">
+            <span class="hero__float-icon hero__float-icon--green">€</span>
+            <div class="hero__float-body">
+              <strong>192,34 €</strong>
+              <span>gasto mensual</span>
+            </div>
+          </div>
+
+          <div class="hero__float hero__float--bl" aria-hidden="true">
+            <span class="hero__float-icon hero__float-icon--cyan">✦</span>
+            <div class="hero__float-body">
+              <strong>RoomMate IA</strong>
+              <span>activo</span>
+            </div>
+          </div>
+
+          <div class="hero__float hero__float--br" aria-hidden="true">
+            <span class="hero__float-icon hero__float-icon--amber">!</span>
+            <div class="hero__float-body">
+              <strong>Debes 0,00 €</strong>
+              <span>deudas resueltas</span>
+            </div>
+          </div>
+
+          <!-- Phone mockup -->
+          <div ref="phone" class="hero__phone">
+            <div class="hero__phone-body">
+              <img :src="inicioUrl" alt="Pantalla de inicio de FlatMate" class="hero__phone-screen" draggable="false" />
+            </div>
+            <div class="hero__phone-glow" aria-hidden="true" />
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="hero__stage">
-      <div class="hero__halo" aria-hidden="true" />
-      <canvas ref="threeCanvas" class="hero__canvas" aria-hidden="true" />
-      <Transition name="hero-fade">
-        <img v-if="showFallback" :src="inicioUrl" alt="Panel principal de FlatMate" class="hero__fallback" />
-      </Transition>
-
-      <div class="hero__signal hero__signal--left">
-        <strong>OCR + IA</strong>
-        <span>tickets interpretados</span>
-      </div>
-      <div class="hero__signal hero__signal--right">
-        <strong>RLS</strong>
-        <span>19 tablas protegidas</span>
-      </div>
-    </div>
-
-    <a href="#story" class="hero__scroll" aria-label="Continuar a la experiencia">
-      <span>Scroll</span>
-      <i />
+    <a href="#story" class="hero__scroll" aria-label="Continuar">
+      <span>Scroll</span><i />
     </a>
   </section>
 </template>
@@ -76,10 +141,13 @@ onUnmounted(() => context?.revert())
 <style scoped lang="scss">
 @use '@/styles/variables' as v;
 
+// ─── Section shell ────────────────────────────────────────────────────────────
 .hero {
   position: relative;
-  min-height: 128svh;
-  padding: clamp(8.5rem, 14vh, 11rem) v.$container-pad clamp(3rem, 8vh, 6rem);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   background: #050507;
   color: #f5f5f7;
@@ -87,244 +155,395 @@ onUnmounted(() => context?.revert())
   &::after {
     content: '';
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 22%;
-    z-index: 1;
+    inset: auto 0 0;
+    height: 14%;
+    z-index: 2;
     pointer-events: none;
-    background: linear-gradient(180deg, transparent, var(--color-bg));
+    background: linear-gradient(to bottom, transparent, var(--color-bg));
+  }
+}
+
+// ─── Background orbs ─────────────────────────────────────────────────────────
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+
+  &--a {
+    width: 52vw;
+    height: 52vw;
+    top: -8vw;
+    right: -6vw;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 68%);
   }
 
-  &__top {
-    position: relative;
-    z-index: 3;
-    max-width: 1080px;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &--b {
+    width: 36vw;
+    height: 36vw;
+    bottom: 0;
+    right: 10vw;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.16), transparent 70%);
+  }
+
+  &--c {
+    width: 28vw;
+    height: 28vw;
+    top: 30%;
+    left: 0;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.14), transparent 70%);
+  }
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+.hero__layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: v.$container-max;
+  margin-inline: auto;
+  padding: clamp(8rem, 14vh, 11rem) v.$container-pad clamp(4rem, 8vh, 6rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: v.$space-3xl;
+  align-items: center;
+
+  @media (max-width: v.$bp-lg) {
+    grid-template-columns: 1fr;
     text-align: center;
   }
+}
 
-  &__eyebrow {
-    display: flex;
+// ─── Copy ────────────────────────────────────────────────────────────────────
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-lg;
+
+  @media (max-width: v.$bp-lg) {
     align-items: center;
-    gap: v.$space-sm;
-    margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
-    font-size: clamp(v.$fs-md, 1.5vw, v.$fs-lg);
-    font-weight: 700;
-    color: #f5f5f7;
-
-    span {
-      padding-left: v.$space-sm;
-      border-left: 1px solid rgba(255, 255, 255, 0.28);
-      color: #86868b;
-      font-weight: 500;
-    }
   }
+}
 
-  &__title {
-    display: flex;
-    flex-direction: column;
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-xs;
+  padding: v.$space-2xs v.$space-sm;
+  border-radius: v.$radius-pill;
+  border: 1px solid rgba(99, 102, 241, 0.42);
+  background: rgba(99, 102, 241, 0.10);
+  font-family: v.$font-mono;
+  font-size: v.$fs-xs;
+  letter-spacing: 0.1em;
+  color: #c7c5ff;
+}
+
+.hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 8px 2px rgba(99, 102, 241, 0.7);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.8); }
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: v.$font-display;
+  font-size: clamp(4rem, 8.5vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  line-height: 0.88;
+
+  @media (max-width: v.$bp-lg) {
     align-items: center;
-    color: #f5f5f7;
-    font-family: v.$font-display;
-    font-size: clamp(3.6rem, 11.8vw, 11.5rem);
-    font-weight: 900;
-    letter-spacing: -0.065em;
-    line-height: 0.88;
   }
+}
 
-  &__title-mask {
-    overflow: hidden;
-    padding-inline: 0.06em;
-    padding-bottom: 0.07em;
+.hero__title-mask {
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.hero__title-line {
+  display: block;
+  will-change: transform, opacity;
+  color: #f5f5f7;
+
+  &--grad {
+    background: linear-gradient(110deg, #fff 10%, #a5b4fc 45%, #67e8f9 80%);
+    background-clip: text;
+    color: transparent;
   }
+}
 
-  &__title-line {
-    display: block;
-    will-change: transform, opacity;
+.hero__claim {
+  max-width: 46ch;
+  color: #a1a1aa;
+  font-size: clamp(v.$fs-md, 1.6vw, v.$fs-xl);
+  line-height: 1.5;
+}
 
-    &--light {
-      background: linear-gradient(110deg, #fff 14%, #9da5ff 48%, #42d8ff 78%);
-      background-clip: text;
-      color: transparent;
-    }
-  }
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-md;
 
-  &__claim {
-    margin-top: clamp(1.25rem, 3vw, 2.2rem);
-    max-width: 560px;
-    color: #a1a1a6;
-    font-size: clamp(v.$fs-md, 1.7vw, v.$fs-xl);
-    line-height: 1.45;
-  }
-
-  &__actions {
-    display: flex;
-    flex-wrap: wrap;
+  @media (max-width: v.$bp-lg) {
     justify-content: center;
-    gap: v.$space-md;
-    margin-top: clamp(1.6rem, 3.5vw, 2.5rem);
+  }
+}
 
-    .button {
-      border-color: rgba(255, 255, 255, 0.34);
-      color: #f5f5f7;
-    }
+.hero__actions .button--primary {
+  border-color: transparent;
+  background: var(--grad-brand);
+  color: #fff;
 
-    .button--primary {
-      border-color: transparent;
-      background: var(--grad-brand);
-      color: #fff;
+  &:hover {
+    border-color: transparent;
+    background: var(--grad-brand-deep);
+    color: #fff;
+    transform: translate(2px, -2px);
+  }
+}
 
-      &:hover {
-        border-color: transparent;
-        background: var(--grad-brand-deep);
-      }
-    }
+.hero__btn-ghost {
+  backdrop-filter: blur(6px);
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  color: #c7c7cc !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #f5f5f7 !important;
+  }
+}
+
+.hero__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-xs;
+  list-style: none;
+  padding: 0;
+
+  @media (max-width: v.$bp-lg) {
+    justify-content: center;
   }
 
-  &__stage {
-    position: relative;
-    height: clamp(420px, 67vh, 720px);
-    max-width: 790px;
-    margin: clamp(2.4rem, 6vh, 4rem) auto 0;
-  }
-
-  &__halo {
-    position: absolute;
-    inset: 12% 0 0;
-    background:
-      radial-gradient(circle at 50% 36%, rgba(99, 102, 241, 0.32), transparent 32%),
-      radial-gradient(circle at 38% 58%, rgba(129, 140, 248, 0.20), transparent 46%),
-      radial-gradient(circle at 64% 64%, rgba(8, 145, 178, 0.18), transparent 48%);
-    filter: blur(38px);
-  }
-
-  &__canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__fallback {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: min(88%, 640px);
-    width: auto;
-    transform: translate(-50%, -50%);
-    border: 7px solid #151518;
-    border-radius: 38px;
-    object-fit: cover;
-    box-shadow: 0 50px 130px -42px rgba(60, 116, 255, 0.64);
-  }
-
-  &__signal {
-    position: absolute;
-    top: 48%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    color: #86868b;
-    font-size: v.$fs-sm;
-
-    strong {
-      color: #f5f5f7;
-      font-size: clamp(1.45rem, 3vw, 2.15rem);
-      font-weight: 700;
-      letter-spacing: -0.035em;
-    }
-
-    &--left {
-      left: 4%;
-      text-align: right;
-    }
-
-    &--right {
-      right: 4%;
-    }
-  }
-
-  &__scroll {
-    position: absolute;
-    bottom: v.$space-xl;
-    left: 50%;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: v.$space-xs;
-    transform: translateX(-50%);
-    color: #86868b;
+  li {
+    padding: v.$space-2xs v.$space-sm;
+    border-radius: v.$radius-pill;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: v.$font-mono;
     font-size: v.$fs-xs;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-
-    i {
-      position: relative;
-      display: block;
-      width: 1px;
-      height: 38px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.16);
-
-      &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: #f5f5f7;
-        animation: hero-scroll 1.8s ease-in-out infinite;
-      }
-    }
-  }
-
-  @media (max-width: v.$bp-sm) {
-    min-height: 114svh;
-
-    &__stage {
-      height: clamp(350px, 52vh, 510px);
-    }
-
-    &__signal {
-      top: auto;
-      bottom: 2%;
-
-      strong {
-        font-size: v.$fs-lg;
-      }
-
-      &--left {
-        left: 0;
-      }
-
-      &--right {
-        right: 0;
-      }
-    }
+    color: #71717a;
+    letter-spacing: 0.06em;
   }
 }
 
-.hero-fade-enter-active,
-.hero-fade-leave-active {
-  transition: opacity 350ms ease;
+// ─── Visual / phone ───────────────────────────────────────────────────────────
+.hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: v.$bp-lg) {
+    order: -1;
+  }
 }
 
-.hero-fade-enter-from,
-.hero-fade-leave-to {
-  opacity: 0;
+// Wrap is wide enough to host both phone + side cards without overlap.
+// Phone is centered inside; cards are anchored to wrap edges.
+.hero__phone-wrap {
+  position: relative;
+  width: min(580px, 52vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: v.$bp-xl) {
+    width: min(500px, 48vw);
+  }
+
+  @media (max-width: v.$bp-lg) {
+    width: min(240px, 60vw);
+  }
+}
+
+.hero__phone {
+  position: relative;
+  width: min(240px, 24vw);
+  aspect-ratio: 9 / 19.5;
+  transform-style: preserve-3d;
+  will-change: transform;
+  flex-shrink: 0;
+
+  @media (max-width: v.$bp-lg) {
+    width: 100%;
+  }
+}
+
+.hero__phone-body {
+  width: 100%;
+  height: 100%;
+  border-radius: 44px;
+  overflow: hidden;
+  background: #000;
+  border: 8px solid #1c1c1e;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 40px 80px -24px rgba(0, 0, 0, 0.7);
+}
+
+.hero__phone-screen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero__phone-glow {
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 55%, rgba(99, 102, 241, 0.55), rgba(34, 211, 238, 0.18) 50%, transparent 70%);
+  filter: blur(40px);
+}
+
+// ─── Floating cards ───────────────────────────────────────────────────────────
+.hero__float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: v.$space-xs;
+  padding: v.$space-xs v.$space-md;
+  background: rgba(18, 18, 24, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: v.$radius-md;
+  backdrop-filter: blur(16px);
+  white-space: nowrap;
+  will-change: transform, opacity;
+
+  // Anchored to wrap edges so they never overlap the centered phone.
+  &--tl { top: 12%; left: 0; }
+  &--tr { top: 22%; right: 0; }
+  &--bl { bottom: 26%; left: 0; }
+  &--br { bottom: 12%; right: 0; }
+
+  @media (max-width: v.$bp-lg) {
+    display: none;
+  }
+}
+
+.hero__float-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: v.$radius-sm;
+  background: rgba(99, 102, 241, 0.28);
+  display: grid;
+  place-items: center;
+  font-size: v.$fs-sm;
+  font-weight: 900;
+  color: #a5b4fc;
+
+  &--green {
+    background: rgba(16, 185, 129, 0.22);
+    color: #6ee7b7;
+  }
+
+  &--cyan {
+    background: rgba(34, 211, 238, 0.18);
+    color: #67e8f9;
+  }
+
+  &--amber {
+    background: rgba(245, 158, 11, 0.20);
+    color: #fcd34d;
+  }
+}
+
+.hero__float-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  strong {
+    font-family: v.$font-display;
+    font-size: v.$fs-sm;
+    font-weight: 900;
+    color: #f5f5f7;
+    letter-spacing: -0.02em;
+  }
+
+  span {
+    font-family: v.$font-mono;
+    font-size: 0.65rem;
+    color: #71717a;
+    letter-spacing: 0.06em;
+  }
+}
+
+// ─── Scroll indicator ─────────────────────────────────────────────────────────
+.hero__scroll {
+  position: absolute;
+  bottom: v.$space-xl;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$space-xs;
+  transform: translateX(-50%);
+  color: #52525b;
+  font-size: v.$fs-xs;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  i {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 36px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #6366f1;
+      animation: hero-scroll 1.8s ease-in-out infinite;
+    }
+  }
 }
 
 @keyframes hero-scroll {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(100%);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__badge-dot { animation: none; }
+  .hero__scroll i::after { animation: none; }
 }
 </style>

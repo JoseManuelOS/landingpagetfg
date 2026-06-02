@@ -171,7 +171,7 @@ onUnmounted(() => context?.revert())
     max-width: 1250px;
     margin-inline: auto;
     padding-inline: v.$container-pad;
-    padding-bottom: clamp(3rem, 7vh, 6rem);
+    padding-bottom: 26vh;
   }
 
   &__device {

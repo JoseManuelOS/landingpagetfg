@@ -11,7 +11,6 @@ const props = withDefaults(defineProps<Props>(), { accent: 'indigo', parallax: t
 <template>
   <div class="phone-frame" :class="`phone-frame--${props.accent}`" :data-parallax="props.parallax ? '' : undefined">
     <div class="phone-frame__bezel">
-      <div class="phone-frame__notch" />
       <img :src="props.src" :alt="props.alt" loading="lazy" />
     </div>
     <div class="phone-frame__glow" aria-hidden="true" />
@@ -46,18 +45,6 @@ const props = withDefaults(defineProps<Props>(), { accent: 'indigo', parallax: t
       object-fit: cover;
       object-position: top;
     }
-  }
-
-  &__notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 38%;
-    height: 22px;
-    background: #000;
-    border-radius: 0 0 14px 14px;
-    z-index: 1;
   }
 
   &__glow {

@@ -32,6 +32,7 @@ export function useThreeScene({ canvas, enabled }: Options) {
       { key: 'finanzas', url: finanzasUrl },
       { key: 'tareas', url: tareasUrl },
     ])
+    phone.group.scale.setScalar(1.12)
     context.scene.add(phone.group)
 
     // Hero idle: subtle floating yaw

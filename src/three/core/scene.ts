@@ -32,18 +32,18 @@ export function createSceneContext(canvas: HTMLCanvasElement): SceneContext {
   camera.position.set(0, 0, 5.4)
   camera.lookAt(0, 0, 0)
 
-  const ambient = new AmbientLight(0xfff8ec, 0.7)
+  const ambient = new AmbientLight(0xfff8ec, 0.42)
   scene.add(ambient)
 
-  const key = new DirectionalLight(0xffffff, 1.6)
+  const key = new DirectionalLight(0xffffff, 2.5)
   key.position.set(2.5, 3, 4)
   scene.add(key)
 
-  const rim = new PointLight(new Color('#4338ca'), 0.7, 12)
+  const rim = new PointLight(new Color('#6366f1'), 1.4, 14)
   rim.position.set(-3, 1.5, -1)
   scene.add(rim)
 
-  const accent = new PointLight(new Color('#0891b2'), 0.6, 14)
+  const accent = new PointLight(new Color('#22d3ee'), 1.0, 16)
   accent.position.set(3, -1.5, 2)
   scene.add(accent)
 

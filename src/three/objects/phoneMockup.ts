@@ -67,12 +67,13 @@ export async function createPhoneMockup(sources: ScreenSource[]): Promise<PhoneM
   sources.forEach((source, i) => {
     const mat = new MeshStandardMaterial({
       map: textures[i],
-      roughness: 0.18,
+      roughness: 0.12,
       metalness: 0,
       transparent: true,
       depthWrite: false,
-      emissive: 0x111122,
-      emissiveIntensity: 0.16,
+      emissive: 0xffffff,
+      emissiveMap: textures[i],
+      emissiveIntensity: 0.35,
       opacity: i === 0 ? 1 : 0,
     })
     const mesh = new Mesh(screenGeo, mat)
