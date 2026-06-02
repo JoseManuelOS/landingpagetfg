@@ -114,8 +114,10 @@ onUnmounted(() => {
     align-items: end;
     perspective: 1200px;
 
-    @media (max-width: v.$bp-md) {
+    @media (max-width: v.$bp-lg) {
       grid-template-columns: 1fr;
+      max-width: 340px;
+      margin-inline: auto;
     }
   }
 
@@ -126,11 +128,10 @@ onUnmounted(() => {
     will-change: transform;
 
     &--offset {
-      @media (min-width: v.$bp-md) {
+      @media (min-width: v.$bp-lg) {
         transform: translateY(-32px);
       }
     }
-
   }
 
   &__caption {

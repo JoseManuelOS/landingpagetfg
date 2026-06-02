@@ -160,10 +160,10 @@ onUnmounted(() => context?.revert())
   &__heading {
     color: #f5f5f7;
     font-family: v.$font-display;
-    font-size: clamp(3.2rem, 9.4vw, 8.5rem);
+    font-size: clamp(2.5rem, 7vw, 6rem);
     font-weight: 900;
     letter-spacing: -0.055em;
-    line-height: 0.94;
+    line-height: 0.96;
   }
 
   &__journey {
@@ -242,44 +242,59 @@ onUnmounted(() => context?.revert())
   &__title {
     color: #f5f5f7;
     font-family: v.$font-display;
-    font-size: clamp(2.6rem, 4.6vw, 4.2rem);
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
     font-weight: 900;
-    letter-spacing: -0.05em;
-    line-height: 1.0;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
   }
 
   &__text {
     color: #a1a1a6;
-    font-size: clamp(v.$fs-lg, 1.6vw, v.$fs-xl);
+    font-size: clamp(v.$fs-md, 1.2vw, v.$fs-lg);
     line-height: 1.5;
   }
 
   @media (max-width: v.$bp-lg) {
     &__device {
-      top: 94px;
-      height: min(53vh, 510px);
+      top: 84px;
+      height: min(50vh, 460px);
       padding-top: v.$space-md;
-      background: linear-gradient(180deg, #050507 82%, transparent);
+      background: none;
+      // Sit above the scrolling chapter text so it never bleeds over the phone.
+      z-index: 3;
+
+      // Full-bleed solid backdrop behind the phone; chapter text scrolls under it.
+      &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -84px;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: calc(100% + 84px + 2.5rem);
+        background: linear-gradient(180deg, #050507 0%, #050507 76%, rgba(5, 5, 7, 0.9) 88%, transparent 100%);
+        z-index: -1;
+      }
     }
 
     &__device-inner {
-      width: min(200px, 48vw);
+      width: min(184px, 46vw);
     }
 
     &__device-stat {
-      width: min(200px, 48vw);
+      width: min(184px, 46vw);
       margin-top: v.$space-xs;
     }
 
     &__chapters {
-      padding-top: min(55vh, 530px);
+      padding-top: min(54vh, 500px);
     }
 
     &__chapter {
-      min-height: 62vh;
+      min-height: 64vh;
       width: 100%;
       justify-content: flex-end;
-      padding-bottom: v.$space-3xl;
+      padding-bottom: v.$space-2xl;
       text-align: center;
     }
   }

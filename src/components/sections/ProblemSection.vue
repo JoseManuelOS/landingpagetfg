@@ -158,6 +158,12 @@ const scatter = [
     &--2 { transform: rotate(-1deg) translateX(-3%); }
     &--3 { transform: rotate(2.4deg) translateX(12%); }
     &--4 { transform: rotate(-1.6deg) translateX(4%); }
+
+    // Drop horizontal offsets where the column is full-width to avoid overflow.
+    @media (max-width: v.$bp-lg) {
+      &--1, &--2, &--3, &--4 { transform: rotate(0deg); }
+      &--0 { transform: rotate(0deg); }
+    }
   }
 
   &__grid {

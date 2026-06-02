@@ -125,9 +125,9 @@ onMounted(() => {
     max-width: none;
 
     h2 {
-      font-size: clamp(3rem, 8.5vw, 7.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.05em;
+      font-size: clamp(2.3rem, 6.2vw, 5.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
     }
 
     em {
@@ -162,7 +162,7 @@ onMounted(() => {
     flex-direction: column;
     gap: v.$space-sm;
     font-family: v.$font-mono;
-    font-size: v.$fs-md;
+    font-size: v.$fs-sm;
     margin-top: v.$space-lg;
 
     li {
@@ -219,12 +219,12 @@ onMounted(() => {
     &-title {
       font-family: v.$font-display;
       font-weight: 900;
-      font-size: v.$fs-lg;
+      font-size: v.$fs-md;
       color: #fff;
     }
     &-sub {
       font-family: v.$font-mono;
-      font-size: v.$fs-sm;
+      font-size: v.$fs-xs;
       color: rgba(255, 255, 255, 0.65);
     }
 

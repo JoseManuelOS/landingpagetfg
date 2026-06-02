@@ -263,10 +263,11 @@ onUnmounted(() => ctx?.revert())
   flex-direction: column;
   align-items: flex-start;
   font-family: v.$font-display;
-  font-size: clamp(4rem, 8.5vw, 9rem);
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
   font-weight: 900;
-  letter-spacing: -0.065em;
-  line-height: 0.88;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  overflow-wrap: break-word;
 
   @media (max-width: v.$bp-lg) {
     align-items: center;
@@ -446,7 +447,8 @@ onUnmounted(() => ctx?.revert())
   &--bl { bottom: 26%; left: 0; }
   &--br { bottom: 12%; right: 0; }
 
-  @media (max-width: v.$bp-lg) {
+  // Only shown where the wrap is wide enough to keep them off the phone.
+  @media (max-width: v.$bp-xl) {
     display: none;
   }
 }

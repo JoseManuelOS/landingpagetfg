@@ -84,8 +84,8 @@ onUnmounted(() => ctx?.revert())
   &__title {
     font-family: v.$font-display;
     font-weight: 900;
-    font-size: clamp(3rem, 9vw, 8rem);
-    line-height: 0.88;
+    font-size: clamp(2.3rem, 6.8vw, 6rem);
+    line-height: 0.92;
     letter-spacing: -0.04em;
     color: #fff;
 

@@ -84,7 +84,7 @@ const timeline = [
     // right side empty.
     .heading-display-sm {
       max-width: none;
-      font-size: clamp(2.6rem, 6.5vw, 5.8rem);
+      font-size: clamp(2rem, 5vw, 4.5rem);
     }
   }
 
@@ -130,6 +130,11 @@ const timeline = [
     border: 1.5px solid var(--color-border-line);
     border-radius: v.$radius-md;
     position: relative;
+
+    @media (max-width: v.$bp-sm) {
+      grid-template-columns: 1fr;
+      gap: v.$space-xs;
+    }
 
     &::before {
       content: '';

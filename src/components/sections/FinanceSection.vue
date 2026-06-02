@@ -162,7 +162,7 @@ onMounted(() => {
   &__balance-value {
     font-family: v.$font-display;
     font-weight: 900;
-    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    font-size: clamp(2.2rem, 4.3vw, 3.3rem);
     letter-spacing: -0.03em;
     line-height: 0.95;
   }
