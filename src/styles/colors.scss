@@ -12,19 +12,31 @@
   --color-text-mute: #8b8377;
   --color-text-inverse: #faf6ef;
 
-  // Brand accents
-  --color-indigo: #4338ca;
-  --color-indigo-soft: rgba(67, 56, 202, 0.14);
+  // Brand accents (matched to FlatMate Flutter app)
+  --color-indigo: #6366f1;
+  --color-indigo-ink: #4338ca;
+  --color-indigo-soft: rgba(99, 102, 241, 0.14);
+  --color-violet: #818cf8;
   --color-cyan: #0891b2;
   --color-cyan-soft: rgba(8, 145, 178, 0.14);
   --color-green: #047857;
   --color-green-soft: rgba(4, 120, 87, 0.14);
   --color-amber: #b45309;
   --color-amber-soft: rgba(180, 83, 9, 0.14);
+  --color-red: #dc2626;
+
+  // Brand gradients (FlatMate dashboard balance card)
+  --grad-brand: linear-gradient(135deg, #6366f1 0%, #818cf8 55%, #a78bfa 100%);
+  --grad-brand-deep: linear-gradient(150deg, #4338ca 0%, #6366f1 60%, #7c8cf8 100%);
 
   // Heavy
   --color-navy: #0f172a;
   --color-navy-soft: rgba(15, 23, 42, 0.08);
+
+  // Elevation (soft app-style shadows)
+  --shadow-sm: 0 2px 8px -2px rgba(26, 24, 21, 0.10);
+  --shadow-card: 0 18px 44px -28px rgba(26, 24, 21, 0.45);
+  --shadow-brand: 0 26px 60px -30px rgba(99, 102, 241, 0.6);
 
   // Lines / borders
   --color-border: rgba(26, 24, 21, 0.10);

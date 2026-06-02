@@ -46,7 +46,7 @@ const reveal = () => {
       })
       tweens.push(t as unknown as gsap.core.Tween)
     }
-    const settle = gsap.delayedCall(props.delay + i * perChar + total * 0.05, () => {
+    const settle = gsap.delayedCall(props.delay + i * perChar + perChar * 0.92, () => {
       state[i] = target
       display.value = state.join('')
     })

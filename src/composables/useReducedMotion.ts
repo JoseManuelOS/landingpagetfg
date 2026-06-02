@@ -1,7 +1,7 @@
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, shallowRef } from 'vue'
 
 export function useReducedMotion() {
-  const prefers = ref(false)
+  const prefers = shallowRef(false)
   let mq: MediaQueryList | null = null
   const update = () => {
     if (mq) prefers.value = mq.matches

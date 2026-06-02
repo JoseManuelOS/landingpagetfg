@@ -3,12 +3,13 @@ interface Props {
   src: string
   alt: string
   accent?: 'indigo' | 'cyan' | 'green' | 'amber'
+  parallax?: boolean
 }
-const props = withDefaults(defineProps<Props>(), { accent: 'indigo' })
+const props = withDefaults(defineProps<Props>(), { accent: 'indigo', parallax: true })
 </script>
 
 <template>
-  <div class="phone-frame" :class="`phone-frame--${props.accent}`" data-parallax>
+  <div class="phone-frame" :class="`phone-frame--${props.accent}`" :data-parallax="props.parallax ? '' : undefined">
     <div class="phone-frame__bezel">
       <div class="phone-frame__notch" />
       <img :src="props.src" :alt="props.alt" loading="lazy" />

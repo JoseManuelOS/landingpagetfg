@@ -1,15 +1,15 @@
-import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue'
+import { onBeforeUnmount, onMounted, shallowRef, type Ref } from 'vue'
 import inicioUrl from '@/assets/flatmate/screen_inicio.png'
 import finanzasUrl from '@/assets/flatmate/screen_finanzas.png'
 import tareasUrl from '@/assets/flatmate/screen_tareas.png'
 
 interface Options {
-  canvas: Ref<HTMLCanvasElement | null>
-  enabled: Ref<boolean>
+  canvas: Readonly<Ref<HTMLCanvasElement | null>>
+  enabled: Readonly<Ref<boolean>>
 }
 
 export function useThreeScene({ canvas, enabled }: Options) {
-  const ready = ref(false)
+  const ready = shallowRef(false)
 
   let rafId = 0
   let visible = true

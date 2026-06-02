@@ -34,7 +34,6 @@ const timeline = [
     <div class="container">
       <header class="tasks__head reveal">
         <span class="section-marker">
-          <span class="section-marker__num">03</span>
           <span>CONVIVENCIA</span>
         </span>
         <h2 class="heading-display-sm">

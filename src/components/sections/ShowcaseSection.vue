@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 import gsap from 'gsap'
 import PhoneFrame from '@/components/PhoneFrame.vue'
 import inicio from '@/assets/flatmate/screen_inicio.png'
-import finanzas from '@/assets/flatmate/screen_finanzas.png'
-import tareas from '@/assets/flatmate/screen_tareas.png'
+import presupuesto from '@/assets/flatmate/screen_presupuesto.png'
+import ia from '@/assets/flatmate/screen_ia.png'
 
 const screens = [
-  { src: inicio, alt: 'Inicio del hogar', label: 'Dashboard', accent: 'cyan' as const },
-  { src: finanzas, alt: 'Finanzas', label: 'Finanzas', accent: 'green' as const },
-  { src: tareas, alt: 'Tareas', label: 'Tareas', accent: 'indigo' as const },
+  {
+    src: inicio,
+    alt: 'Inicio del hogar',
+    label: 'Dashboard',
+    description: 'Balance mensual e IA',
+    accent: 'cyan' as const,
+  },
+  {
+    src: presupuesto,
+    alt: 'Presupuestos mensuales',
+    label: 'Presupuestos',
+    description: 'Límite por categoría',
+    accent: 'green' as const,
+  },
+  {
+    src: ia,
+    alt: 'Asistente RoomMate IA',
+    label: 'RoomMate IA',
+    description: 'Chat sobre el hogar',
+    accent: 'indigo' as const,
+  },
 ]
 
-const root = ref<HTMLElement | null>(null)
+const root = useTemplateRef<HTMLElement>('root')
 let cleanups: Array<() => void> = []
 
 onMounted(() => {
@@ -55,7 +73,6 @@ onUnmounted(() => {
     <div class="container">
       <header class="showcase__head reveal">
         <span class="section-marker">
-          <span class="section-marker__num">06</span>
           <span>SHOWCASE</span>
         </span>
         <h2 class="heading-display-sm">Pantallas reales del TFG.</h2>
@@ -69,7 +86,10 @@ onUnmounted(() => {
           data-stagger-child
         >
           <PhoneFrame :src="screen.src" :alt="screen.alt" :accent="screen.accent" />
-          <figcaption>{{ screen.label }}</figcaption>
+          <figcaption class="showcase__caption">
+            <span class="showcase__label">{{ screen.label }}</span>
+            <span class="showcase__description">{{ screen.description }}</span>
+          </figcaption>
         </figure>
       </div>
     </div>
@@ -111,15 +131,27 @@ onUnmounted(() => {
       }
     }
 
-    figcaption {
-      text-align: center;
-      font-family: v.$font-mono;
-      font-size: v.$fs-xs;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-text-dim);
-      font-weight: 700;
-    }
+  }
+
+  &__caption {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-2xs;
+    text-align: center;
+  }
+
+  &__label {
+    font-family: v.$font-mono;
+    font-size: v.$fs-xs;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    font-weight: 700;
+  }
+
+  &__description {
+    color: var(--color-text-mute);
+    font-size: v.$fs-sm;
   }
 }
 </style>

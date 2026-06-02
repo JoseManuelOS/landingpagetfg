@@ -36,16 +36,16 @@ onMounted(() => {
 const layers = [
   { name: 'Cliente Flutter', tech: 'Riverpod · GoRouter · fl_chart', accent: 'indigo' },
   { name: 'Auth', tech: 'Supabase Auth · Google Sign-In', accent: 'green' },
-  { name: 'Base de datos', tech: 'PostgreSQL · RLS por hogar · 14 tablas', accent: 'green' },
+  { name: 'Base de datos', tech: 'PostgreSQL · RLS por hogar · 19 tablas', accent: 'green' },
   { name: 'RPC', tech: 'calculate_simplified_debts · get_budget_status', accent: 'cyan' },
   { name: 'Edge Functions', tech: 'household-ai · create-payment-intent · event-notifications', accent: 'cyan' },
   { name: 'Servicios externos', tech: 'Stripe · Firebase Messaging · ML Kit', accent: 'amber' },
 ] as const
 
 const rows = [
-  ['Cliente', 'Flutter 3.11+, Riverpod 2.6.1, GoRouter 14.8.1, fl_chart 0.70.2'],
+  ['Cliente', 'Flutter multiplataforma, Dart SDK 3.11, Riverpod 2.6.1, GoRouter 14.8.1'],
   ['Auth', 'Supabase Auth + Google Sign-In 7.2.0'],
-  ['DB', 'PostgreSQL Supabase, 14 tablas, RLS por hogar'],
+  ['DB', 'PostgreSQL Supabase, 19 tablas versionadas, RLS por hogar'],
   ['RPC', 'calculate_simplified_debts, calculate_debts, get_budget_status'],
   ['Edge Functions', 'household-ai, create-payment-intent, event-notifications, subscription-reminders'],
   ['Pagos', 'Stripe 11.4.0 + PaymentIntent vía Edge Function'],
@@ -60,7 +60,6 @@ const rows = [
     <div class="container">
       <header class="security__head reveal">
         <span class="section-marker">
-          <span class="section-marker__num">05</span>
           <span>ARQUITECTURA · SEGURIDAD</span>
         </span>
         <h2 class="heading-display-sm">

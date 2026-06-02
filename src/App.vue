@@ -2,9 +2,9 @@
 import AppHeader from '@/components/AppHeader.vue'
 import AppCursor from '@/components/AppCursor.vue'
 import Marquee from '@/components/Marquee.vue'
-import SectionBanner from '@/components/SectionBanner.vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
 import ProblemSection from '@/components/sections/ProblemSection.vue'
+import ImmersiveStorySection from '@/components/sections/ImmersiveStorySection.vue'
 import FinanceSection from '@/components/sections/FinanceSection.vue'
 import TasksSection from '@/components/sections/TasksSection.vue'
 import AISection from '@/components/sections/AISection.vue'
@@ -18,21 +18,7 @@ import { useScrollAnimations } from '@/composables/useScrollAnimations'
 useLenisScroll()
 useScrollAnimations()
 
-const marqueeItems = [
-  'Flutter',
-  'Supabase',
-  'PostgreSQL',
-  'Riverpod',
-  'GoRouter',
-  'Stripe',
-  'OpenAI',
-  'ML Kit OCR',
-  'Edge Functions',
-  'RLS',
-  'FCM',
-  'fl_chart',
-  'PDF Export',
-]
+const marqueeItems = ['FlatMate', 'Flutter', 'Supabase', 'IA', 'OCR', 'Stripe', 'Firebase', 'RLS']
 </script>
 
 <template>
@@ -42,15 +28,11 @@ const marqueeItems = [
     <HeroSection />
     <Marquee :items="marqueeItems" accent="indigo" />
     <ProblemSection />
-    <SectionBanner text="Finanzas claras · Sin Excel · Sin discusiones" variant="indigo" />
+    <ImmersiveStorySection />
     <FinanceSection />
-    <SectionBanner text="Convivencia en común · Tareas asignadas · Sin olvidos" variant="amber" />
     <TasksSection />
-    <SectionBanner text="IA · OCR · Procesos backend automatizados" variant="cyan" />
     <AISection />
-    <SectionBanner text="RLS por hogar · Datos sensibles aislados" variant="green" />
     <SecuritySection />
-    <SectionBanner text="Pantallas reales · TFG completo" variant="indigo" />
     <ShowcaseSection />
     <CTASection />
   </main>

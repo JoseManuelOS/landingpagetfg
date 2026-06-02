@@ -3,15 +3,13 @@ import { onMounted, reactive } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PhoneFrame from '@/components/PhoneFrame.vue'
-import financeUrl from '@/assets/flatmate/screen_finanzas.png'
+import statsUrl from '@/assets/flatmate/screen_stats.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const counters = reactive({ debt: 0, budget: 0, total: 0 })
+const counters = reactive({ monthly: 0, receivable: 0, owed: 66.06 })
 
-const formatEur = (v: number) => `−${v.toFixed(0)} €`
-const formatPct = (v: number) => `${v.toFixed(0)}%`
-const formatTotal = (v: number) => `${v.toFixed(2).replace('.', ',')} €`
+const formatEur = (value: number) => `${value.toFixed(2).replace('.', ',')} EUR`
 
 onMounted(() => {
   ScrollTrigger.create({
@@ -19,9 +17,9 @@ onMounted(() => {
     start: 'top 80%',
     once: true,
     onEnter: () => {
-      gsap.to(counters, { debt: 24, duration: 1.4, ease: 'power2.out' })
-      gsap.to(counters, { budget: 78, duration: 1.4, ease: 'power2.out', delay: 0.1 })
-      gsap.to(counters, { total: 142.5, duration: 1.4, ease: 'power2.out', delay: 0.2 })
+      gsap.to(counters, { monthly: 192.34, duration: 1.4, ease: 'power2.out' })
+      gsap.to(counters, { receivable: 126.28, duration: 1.4, ease: 'power2.out', delay: 0.1 })
+      gsap.to(counters, { owed: 0, duration: 1.4, ease: 'power2.out', delay: 0.2 })
     },
   })
 })
@@ -32,7 +30,6 @@ onMounted(() => {
     <div class="container">
       <header class="finance__head reveal">
         <span class="section-marker">
-          <span class="section-marker__num">02</span>
           <span>FINANZAS</span>
         </span>
         <h2 class="heading-display-sm">
@@ -53,23 +50,24 @@ onMounted(() => {
             <li><strong>Stats con fl_chart</strong> y export PDF del informe mensual.</li>
           </ul>
 
-          <dl class="finance__stats">
-            <div class="finance__stat finance__stat--green">
-              <dt>DEUDA RESUELTA</dt>
-              <dd>{{ formatEur(counters.debt) }}</dd>
+          <div class="finance__stats">
+            <div class="finance__balance">
+              <span class="finance__balance-label">GASTO TOTAL · ABRIL 2026</span>
+              <strong class="finance__balance-value">{{ formatEur(counters.monthly) }}</strong>
+              <div class="finance__chips">
+                <span class="finance__chip finance__chip--green">
+                  Te deben {{ formatEur(counters.receivable) }}
+                </span>
+                <span class="finance__chip finance__chip--amber">
+                  Debes {{ formatEur(counters.owed) }}
+                </span>
+              </div>
             </div>
-            <div class="finance__stat finance__stat--amber">
-              <dt>PRESUPUESTO ABRIL</dt>
-              <dd>{{ formatPct(counters.budget) }}</dd>
-            </div>
-            <div class="finance__stat finance__stat--indigo">
-              <dt>GASTO MAYOR</dt>
-              <dd>{{ formatTotal(counters.total) }}</dd>
-            </div>
-          </dl>
+          </div>
+          <p class="finance__sample">Datos de la captura de demostración · abril 2026</p>
         </div>
         <div class="finance__visual">
-          <PhoneFrame :src="financeUrl" alt="Pantalla de finanzas de FlatMate" accent="green" />
+          <PhoneFrame :src="statsUrl" alt="Estadísticas de gastos de FlatMate" accent="green" />
         </div>
       </div>
     </div>
@@ -127,43 +125,88 @@ onMounted(() => {
   }
 
   &__stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: v.$space-xs;
     margin-top: v.$space-lg;
+  }
 
-    @media (max-width: v.$bp-sm) {
-      grid-template-columns: 1fr;
+  &__balance {
+    position: relative;
+    overflow: hidden;
+    padding: v.$space-lg;
+    border-radius: v.$radius-lg;
+    background: var(--grad-brand-deep);
+    box-shadow: var(--shadow-brand);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-sm;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 60%;
+      height: 160%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 60%);
+      pointer-events: none;
     }
   }
 
-  &__stat {
-    padding: v.$space-md;
-    background: var(--color-surface);
-    border: 1.5px solid var(--color-border-line);
-    border-radius: v.$radius-md;
+  &__balance-label {
+    font-family: v.$font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  &__balance-value {
+    font-family: v.$font-display;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 5vw, 3.8rem);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  &__chips {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: v.$space-xs;
+    margin-top: v.$space-2xs;
+  }
+
+  &__chip {
+    padding: v.$space-2xs v.$space-sm;
+    border-radius: v.$radius-pill;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(4px);
+    font-family: v.$font-mono;
+    font-size: v.$fs-xs;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
     gap: v.$space-2xs;
 
-    dt {
-      font-family: v.$font-mono;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--color-text-mute);
-    }
-    dd {
-      font-family: v.$font-display;
-      font-weight: 900;
-      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-      letter-spacing: -0.02em;
-      line-height: 1;
+    &::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
-    &--green dd { color: var(--color-green); }
-    &--amber dd { color: var(--color-amber); }
-    &--indigo dd { color: var(--color-indigo); }
+    &--green { color: #6ee7b7; }
+    &--amber { color: #fcd34d; }
+  }
+
+  &__sample {
+    margin-top: v.$space-xs;
+    color: var(--color-text-mute);
+    font-family: v.$font-mono;
+    font-size: v.$fs-xs;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   &__visual {

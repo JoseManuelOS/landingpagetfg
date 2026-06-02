@@ -310,7 +310,7 @@ Timelines recomendadas:
 
 ```ts
 // Hero
-gsap.timeline()
+gsap.timeline()  
   .from(".hero-title", { y: 40, opacity: 0, duration: 0.8, ease: "power2.out" })
   .from(".hero-copy", { y: 24, opacity: 0, duration: 0.5 }, "-=0.35")
   .from(".hero-phone", { y: 32, rotate: -3, opacity: 0, duration: 0.8 }, "-=0.35");

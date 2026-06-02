@@ -1,12 +1,37 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import AppearingText from '@/components/AppearingText.vue'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const root = useTemplateRef<HTMLElement>('root')
+let ctx: gsap.Context | null = null
+
+onMounted(() => {
+  ctx = gsap.context(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: root.value,
+        start: 'top 78%',
+        once: true,
+      },
+      defaults: { ease: 'power3.out' },
+    })
+    tl.from('.cta__title', { autoAlpha: 0, y: 40, duration: 0.75 })
+      .from('.cta__sub', { autoAlpha: 0, y: 20, duration: 0.55 }, '-=0.38')
+      .from('.cta__actions > *', { autoAlpha: 0, y: 18, duration: 0.45, stagger: 0.1 }, '-=0.28')
+  }, root.value ?? undefined)
+})
+
+onUnmounted(() => ctx?.revert())
 </script>
 
 <template>
-  <section id="cta" class="section section--cta cta" data-section="cta">
+  <section id="cta" ref="root" class="section section--cta cta" data-section="cta">
     <div class="container cta__inner">
       <span class="section-marker">
-        <span class="section-marker__num">07</span>
         <span>CIERRE</span>
       </span>
 
@@ -17,20 +42,26 @@ import AppearingText from '@/components/AppearingText.vue'
       </h2>
 
       <p class="cta__sub">
-        FlatMate · TFG 2026 — Flutter, Supabase, IA y OCR de extremo a extremo.
+        FlatMate · TFG 2026 - Flutter, Supabase, IA y OCR de extremo a extremo.
       </p>
 
       <div class="cta__actions">
-        <!-- URL placeholder hasta confirmar repositorio público y memoria final -->
-        <a href="#" class="button button--primary">Ver repositorio</a>
-        <a href="#" class="button">Descargar memoria</a>
-        <a href="#" class="button button--ghost">Contactar</a>
+        <a
+          href="https://github.com/JoseManuelOS/TFG"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button button--primary"
+        >
+          Ver código
+        </a>
+        <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button">Descargar memoria</a>
+        <a href="#hero" class="button button--ghost">Volver arriba</a>
       </div>
     </div>
 
     <footer class="cta__foot">
       <span>© 2026 · José Manuel Ortega Soto</span>
-      <span class="cta__foot-meta">Hecho con Vue 3 · GSAP · Lenis · Three.js</span>
+      <span class="cta__foot-meta">Landing con Vue 3 · GSAP · Lenis · Three.js</span>
     </footer>
   </section>
 </template>

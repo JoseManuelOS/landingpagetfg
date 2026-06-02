@@ -49,7 +49,6 @@ onMounted(() => {
     <div class="container">
       <header class="ai__head reveal">
         <span class="section-marker">
-          <span class="section-marker__num">04</span>
           <span>IA · OCR · AUTOMATIZACIÓN</span>
         </span>
         <h2 class="heading-display-sm">

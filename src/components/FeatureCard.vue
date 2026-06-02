@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   background: var(--color-surface);
   border: 1.5px solid var(--color-border-line);
   border-radius: v.$radius-md;
+  box-shadow: var(--shadow-sm);
   transition: transform 280ms v.$ease-out, box-shadow 280ms v.$ease-out;
 
   &::after {
