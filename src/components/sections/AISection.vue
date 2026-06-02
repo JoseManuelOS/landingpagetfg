@@ -120,9 +120,15 @@ onMounted(() => {
   &__head {
     display: flex;
     flex-direction: column;
-    gap: v.$space-md;
-    margin-bottom: v.$space-2xl;
-    max-width: 60ch;
+    gap: v.$space-lg;
+    margin-bottom: v.$space-3xl;
+    max-width: none;
+
+    h2 {
+      font-size: clamp(3rem, 8.5vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+    }
 
     em {
       font-style: italic;
@@ -154,23 +160,29 @@ onMounted(() => {
   &__list {
     display: flex;
     flex-direction: column;
-    gap: v.$space-xs;
+    gap: v.$space-sm;
     font-family: v.$font-mono;
-    font-size: v.$fs-sm;
-    margin-top: v.$space-md;
+    font-size: v.$fs-md;
+    margin-top: v.$space-lg;
 
     li {
       display: grid;
-      grid-template-columns: 92px 1fr;
+      grid-template-columns: 120px 1fr;
       gap: v.$space-md;
-      padding-block: v.$space-xs;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.65);
+      align-items: baseline;
+      padding-block: v.$space-sm;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.72);
 
       span {
         font-weight: 700;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.16em;
+        font-size: v.$fs-sm;
         color: #fff;
+        padding: 4px 10px;
+        border-radius: v.$radius-pill;
+        background: rgba(99, 102, 241, 0.22);
+        justify-self: start;
       }
     }
   }
@@ -179,7 +191,7 @@ onMounted(() => {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    max-width: 460px;
+    max-width: 540px;
     margin-inline: auto;
   }
 
@@ -194,10 +206,10 @@ onMounted(() => {
 
   &__node {
     position: absolute;
-    padding: v.$space-sm v.$space-md;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1.5px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(8px);
+    padding: v.$space-md v.$space-lg;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     border-radius: v.$radius-md;
     display: flex;
     flex-direction: column;
@@ -207,13 +219,13 @@ onMounted(() => {
     &-title {
       font-family: v.$font-display;
       font-weight: 900;
-      font-size: v.$fs-sm;
+      font-size: v.$fs-lg;
       color: #fff;
     }
     &-sub {
       font-family: v.$font-mono;
-      font-size: v.$fs-xs;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: v.$fs-sm;
+      color: rgba(255, 255, 255, 0.65);
     }
 
     &--ticket { border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 0 32px -8px rgba(245, 158, 11, 0.5); }

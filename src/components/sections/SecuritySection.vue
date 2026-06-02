@@ -5,54 +5,74 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const layers = [
+  {
+    name: 'Cliente Flutter',
+    role: 'UI multiplataforma y estado',
+    accent: 'indigo',
+    badges: ['Flutter', 'Dart 3.11', 'Riverpod 2.6.1', 'GoRouter 14.8.1', 'fl_chart 0.70.2'],
+  },
+  {
+    name: 'Autenticación',
+    role: 'Identidad y sesión',
+    accent: 'cyan',
+    badges: ['Supabase Auth', 'Google Sign-In 7.2.0'],
+  },
+  {
+    name: 'Base de datos',
+    role: 'Aislamiento por hogar con RLS',
+    accent: 'green',
+    badges: ['PostgreSQL', '19 tablas', 'RLS por hogar'],
+  },
+  {
+    name: 'Lógica en BD · RPC',
+    role: 'Cálculos críticos en el servidor',
+    accent: 'green',
+    badges: ['calculate_simplified_debts', 'calculate_debts', 'get_budget_status'],
+  },
+  {
+    name: 'Edge Functions',
+    role: 'Procesos backend y secretos',
+    accent: 'cyan',
+    badges: ['household-ai', 'create-payment-intent', 'event-notifications', 'subscription-reminders'],
+  },
+  {
+    name: 'Servicios externos',
+    role: 'Pagos, push y OCR',
+    accent: 'amber',
+    badges: ['Stripe 11.4.0', 'Firebase Messaging 16.1.3', 'ML Kit 0.15.0', 'pdf + printing'],
+  },
+] as const
+
 onMounted(() => {
   gsap.from('.security__layer', {
     opacity: 0,
-    y: 16,
+    x: -24,
     duration: 0.5,
     ease: 'power2.out',
-    stagger: 0.07,
+    stagger: 0.1,
     scrollTrigger: {
-      trigger: '.security__layers',
+      trigger: '.security__stack',
       start: 'top 78%',
       once: true,
     },
   })
 
-  gsap.from('.security__row', {
-    opacity: 0,
-    x: -12,
-    duration: 0.45,
-    ease: 'power2.out',
-    stagger: 0.05,
-    scrollTrigger: {
-      trigger: '.security__table',
-      start: 'top 82%',
-      once: true,
+  gsap.fromTo(
+    '.security__spine-fill',
+    { scaleY: 0 },
+    {
+      scaleY: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.security__stack',
+        start: 'top 70%',
+        end: 'bottom 70%',
+        scrub: true,
+      },
     },
-  })
+  )
 })
-
-const layers = [
-  { name: 'Cliente Flutter', tech: 'Riverpod · GoRouter · fl_chart', accent: 'indigo' },
-  { name: 'Auth', tech: 'Supabase Auth · Google Sign-In', accent: 'green' },
-  { name: 'Base de datos', tech: 'PostgreSQL · RLS por hogar · 19 tablas', accent: 'green' },
-  { name: 'RPC', tech: 'calculate_simplified_debts · get_budget_status', accent: 'cyan' },
-  { name: 'Edge Functions', tech: 'household-ai · create-payment-intent · event-notifications', accent: 'cyan' },
-  { name: 'Servicios externos', tech: 'Stripe · Firebase Messaging · ML Kit', accent: 'amber' },
-] as const
-
-const rows = [
-  ['Cliente', 'Flutter multiplataforma, Dart SDK 3.11, Riverpod 2.6.1, GoRouter 14.8.1'],
-  ['Auth', 'Supabase Auth + Google Sign-In 7.2.0'],
-  ['DB', 'PostgreSQL Supabase, 19 tablas versionadas, RLS por hogar'],
-  ['RPC', 'calculate_simplified_debts, calculate_debts, get_budget_status'],
-  ['Edge Functions', 'household-ai, create-payment-intent, event-notifications, subscription-reminders'],
-  ['Pagos', 'Stripe 11.4.0 + PaymentIntent vía Edge Function'],
-  ['Push', 'Firebase Messaging 16.1.3 + flutter_local_notifications 17.2.4'],
-  ['OCR', 'Google ML Kit Text Recognition 0.15.0'],
-  ['Export', 'pdf 3.12.0 + printing 5.14.3'],
-]
 </script>
 
 <template>
@@ -62,29 +82,36 @@ const rows = [
         <span class="section-marker">
           <span>ARQUITECTURA · SEGURIDAD</span>
         </span>
-        <h2 class="heading-display-sm">
-          Cada hogar aislado. Operaciones críticas en backend.
-        </h2>
+        <h2 class="heading-display-sm">Cada hogar aislado. Lo crítico, en backend.</h2>
+        <p class="lead">
+          Una arquitectura por capas pensada para datos sensibles: cada hogar ve solo su
+          información y las operaciones importantes viven en el servidor, nunca en el cliente.
+        </p>
       </header>
 
-      <div class="security__layers">
-        <div
-          v-for="layer in layers"
+      <ol class="security__stack">
+        <div class="security__spine" aria-hidden="true">
+          <span class="security__spine-fill" />
+        </div>
+
+        <li
+          v-for="(layer, i) in layers"
           :key="layer.name"
           class="security__layer"
           :class="`security__layer--${layer.accent}`"
         >
-          <span class="security__layer-name">{{ layer.name }}</span>
-          <span class="security__layer-tech">{{ layer.tech }}</span>
-        </div>
-      </div>
-
-      <div class="security__table" role="table" aria-label="Stack técnico verificado">
-        <div v-for="row in rows" :key="row[0]" class="security__row" role="row">
-          <span class="security__cell security__cell--key" role="cell">{{ row[0] }}</span>
-          <span class="security__cell" role="cell">{{ row[1] }}</span>
-        </div>
-      </div>
+          <span class="security__node">{{ String(i + 1).padStart(2, '0') }}</span>
+          <div class="security__card">
+            <div class="security__card-head">
+              <h3 class="security__name">{{ layer.name }}</h3>
+              <p class="security__role">{{ layer.role }}</p>
+            </div>
+            <ul class="security__badges">
+              <li v-for="b in layer.badges" :key="b">{{ b }}</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 </template>
@@ -97,93 +124,145 @@ const rows = [
     display: flex;
     flex-direction: column;
     gap: v.$space-md;
-    max-width: 60ch;
-    margin-bottom: v.$space-2xl;
+    max-width: 64ch;
+    margin-bottom: v.$space-3xl;
   }
 
-  &__layers {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: v.$space-xs;
-    margin-bottom: v.$space-2xl;
+  &__stack {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-md;
+  }
+
+  // Vertical spine connecting the layer nodes.
+  &__spine {
+    position: absolute;
+    left: 27px;
+    top: 28px;
+    bottom: 28px;
+    width: 2px;
+    background: var(--color-border-strong);
+
+    @media (max-width: v.$bp-sm) {
+      left: 21px;
+    }
+  }
+
+  &__spine-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--color-indigo), var(--color-cyan), var(--color-green), var(--color-amber));
+    transform-origin: top;
   }
 
   &__layer {
-    padding: v.$space-md;
-    background: var(--color-surface);
-    border: 1.5px solid var(--color-border-line);
-    border-radius: v.$radius-md;
-    display: flex;
-    flex-direction: column;
-    gap: v.$space-2xs;
     position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--accent);
-      border-radius: v.$radius-md 0 0 v.$radius-md;
-    }
-
-    &-name {
-      font-family: v.$font-display;
-      font-weight: 900;
-      letter-spacing: -0.01em;
-    }
-    &-tech {
-      font-family: v.$font-mono;
-      font-size: v.$fs-xs;
-      color: var(--color-text-dim);
-    }
-
-    &--indigo { --accent: var(--color-indigo); }
-    &--cyan { --accent: var(--color-cyan); }
-    &--green { --accent: var(--color-green); }
-    &--amber { --accent: var(--color-amber); }
-  }
-
-  &__table {
-    display: flex;
-    flex-direction: column;
-    border: 1.5px solid var(--color-border-line);
-    border-radius: v.$radius-md;
-    overflow: hidden;
-    background: var(--color-surface);
-  }
-
-  &__row {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    border-bottom: 1px solid var(--color-border);
-
-    &:last-child {
-      border-bottom: 0;
-    }
+    grid-template-columns: 56px 1fr;
+    gap: v.$space-md;
+    align-items: stretch;
 
     @media (max-width: v.$bp-sm) {
-      grid-template-columns: 1fr;
+      grid-template-columns: 44px 1fr;
+      gap: v.$space-sm;
     }
   }
 
-  &__cell {
-    padding: v.$space-sm v.$space-md;
+  &__node {
+    position: relative;
+    z-index: 1;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-family: v.$font-mono;
+    font-weight: 700;
     font-size: v.$fs-sm;
-    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
 
-    &--key {
-      background: var(--color-bg);
-      color: var(--color-text);
+    @media (max-width: v.$bp-sm) {
+      width: 44px;
+      height: 44px;
+      font-size: v.$fs-xs;
+    }
+  }
+
+  &__card {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border-line);
+    border-left: 4px solid var(--accent);
+    border-radius: v.$radius-md;
+    box-shadow: var(--shadow-sm);
+    padding: v.$space-md v.$space-lg;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: v.$space-sm v.$space-lg;
+  }
+
+  &__card-head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-family: v.$font-display;
+    font-weight: 900;
+    font-size: v.$fs-xl;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  &__role {
+    font-size: v.$fs-sm;
+    color: var(--color-text-dim);
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: v.$space-2xs;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+
+    li {
       font-family: v.$font-mono;
       font-size: v.$fs-xs;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      display: flex;
-      align-items: center;
-      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--color-text-dim);
+      padding: 4px 10px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: v.$radius-pill;
+      background: var(--color-bg);
+    }
+  }
+
+  &__layer--indigo { --accent: var(--color-indigo); }
+  &__layer--cyan { --accent: var(--color-cyan); }
+  &__layer--green { --accent: var(--color-green); }
+  &__layer--amber { --accent: var(--color-amber); }
+
+  @media (max-width: v.$bp-md) {
+    &__card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__badges {
+      justify-content: flex-start;
     }
   }
 }

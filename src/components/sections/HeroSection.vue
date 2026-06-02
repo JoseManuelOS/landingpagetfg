@@ -71,9 +71,7 @@ onUnmounted(() => ctx?.revert())
 
         <div class="hero__actions">
           <a href="#story" class="button button--primary">Descubrir FlatMate</a>
-          <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button hero__btn-ghost">
-            Memoria TFG
-          </a>
+          <a href="#security" class="button hero__btn-ghost">Ver arquitectura</a>
         </div>
 
         <ul class="hero__tech" aria-label="Stack tecnológico">

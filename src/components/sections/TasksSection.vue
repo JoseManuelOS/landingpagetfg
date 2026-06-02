@@ -78,7 +78,14 @@ const timeline = [
     flex-direction: column;
     gap: v.$space-md;
     margin-bottom: v.$space-2xl;
-    max-width: 60ch;
+    max-width: none;
+
+    // Stretch the title across the full width instead of leaving the
+    // right side empty.
+    .heading-display-sm {
+      max-width: none;
+      font-size: clamp(2.6rem, 6.5vw, 5.8rem);
+    }
   }
 
   &__grid {

@@ -212,6 +212,11 @@ onMounted(() => {
   &__visual {
     display: flex;
     justify-content: center;
+    margin-top: clamp(-4rem, -5vw, -2rem);
+
+    @media (max-width: v.$bp-md) {
+      margin-top: 0;
+    }
   }
 }
 </style>
