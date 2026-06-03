@@ -359,10 +359,6 @@ onUnmounted(() => ctx?.revert())
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media (max-width: v.$bp-lg) {
-    order: -1;
-  }
 }
 
 // Wrap is wide enough to host both phone + side cards without overlap.
