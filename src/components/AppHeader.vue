@@ -50,9 +50,9 @@ onUnmounted(() => {
 
 <template>
   <header class="app-header" :class="{ 'app-header--solid': scrolled, 'app-header--inverted': inverted }">
-    <a href="#hero" class="app-header__brand" aria-label="FlatMate, volver al inicio">
+    <a href="#hero" class="app-header__brand" aria-label="Roomate, volver al inicio">
       <img src="/meta/app-icon.png" alt="" width="40" height="40" />
-      <span>FlatMate</span>
+      <span>Roomate</span>
     </a>
     <nav class="app-header__nav" aria-label="Secciones">
       <a
@@ -66,7 +66,7 @@ onUnmounted(() => {
       </a>
     </nav>
     <div class="app-header__cta">
-      <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button button--primary">Memoria</a>
+      <a href="/docs/Roomate_Memoria_TFG.pdf" download class="button button--primary">Memoria</a>
     </div>
   </header>
 </template>

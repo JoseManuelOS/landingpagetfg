@@ -42,7 +42,7 @@ onUnmounted(() => ctx?.revert())
       </h2>
 
       <p class="cta__sub">
-        FlatMate · TFG 2026 - Flutter, Supabase, IA y OCR de extremo a extremo.
+        Roomate · TFG 2026 - Flutter, Supabase, IA y OCR de extremo a extremo.
       </p>
 
       <div class="cta__actions">
@@ -54,7 +54,7 @@ onUnmounted(() => ctx?.revert())
         >
           Ver código
         </a>
-        <a href="/docs/FlatMate_Memoria_TFG.pdf" download class="button">Descargar memoria</a>
+        <a href="/docs/Roomate_Memoria_TFG.pdf" download class="button">Descargar memoria</a>
         <a href="#hero" class="button button--ghost">Volver arriba</a>
       </div>
     </div>

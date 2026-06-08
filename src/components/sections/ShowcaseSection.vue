@@ -2,9 +2,9 @@
 import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 import gsap from 'gsap'
 import PhoneFrame from '@/components/PhoneFrame.vue'
-import inicio from '@/assets/flatmate/screen_inicio.png'
-import presupuesto from '@/assets/flatmate/screen_presupuesto.png'
-import ia from '@/assets/flatmate/screen_ia.png'
+import inicio from '@/assets/roomate/screen_inicio.png'
+import presupuesto from '@/assets/roomate/screen_presupuesto.png'
+import ia from '@/assets/roomate/screen_ia.png'
 
 const screens = [
   {
@@ -23,8 +23,8 @@ const screens = [
   },
   {
     src: ia,
-    alt: 'Asistente RoomMate IA',
-    label: 'RoomMate IA',
+    alt: 'Asistente Roomate IA',
+    label: 'Roomate IA',
     description: 'Chat sobre el hogar',
     accent: 'indigo' as const,
   },

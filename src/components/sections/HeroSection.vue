@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 import gsap from 'gsap'
-import inicioUrl from '@/assets/flatmate/screen_inicio.png'
+import inicioUrl from '@/assets/roomate/screen_inicio.png'
 
 const root = useTemplateRef<HTMLElement>('root')
 const phone = useTemplateRef<HTMLElement>('phone')
@@ -54,7 +54,7 @@ onUnmounted(() => ctx?.revert())
       <div class="hero__copy">
         <span class="hero__badge">
           <span class="hero__badge-dot" />
-          FlatMate · TFG 2026
+          Roomate · TFG 2026
         </span>
 
         <h1 class="hero__title">
@@ -70,7 +70,7 @@ onUnmounted(() => ctx?.revert())
         </p>
 
         <div class="hero__actions">
-          <a href="#story" class="button button--primary">Descubrir FlatMate</a>
+          <a href="#story" class="button button--primary">Descubrir Roomate</a>
           <a href="#security" class="button hero__btn-ghost">Ver arquitectura</a>
         </div>
 
@@ -106,7 +106,7 @@ onUnmounted(() => ctx?.revert())
           <div class="hero__float hero__float--bl" aria-hidden="true">
             <span class="hero__float-icon hero__float-icon--cyan">✦</span>
             <div class="hero__float-body">
-              <strong>RoomMate IA</strong>
+              <strong>Roomate IA</strong>
               <span>activo</span>
             </div>
           </div>
@@ -122,7 +122,7 @@ onUnmounted(() => ctx?.revert())
           <!-- Phone mockup -->
           <div ref="phone" class="hero__phone">
             <div class="hero__phone-body">
-              <img :src="inicioUrl" alt="Pantalla de inicio de FlatMate" class="hero__phone-screen" draggable="false" />
+              <img :src="inicioUrl" alt="Pantalla de inicio de Roomate" class="hero__phone-screen" draggable="false" />
             </div>
             <div class="hero__phone-glow" aria-hidden="true" />
           </div>

@@ -3,7 +3,7 @@ import { onMounted, reactive } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PhoneFrame from '@/components/PhoneFrame.vue'
-import statsUrl from '@/assets/flatmate/screen_stats.png'
+import statsUrl from '@/assets/roomate/screen_stats.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -67,7 +67,7 @@ onMounted(() => {
           <p class="finance__sample">Datos de la captura de demostración · abril 2026</p>
         </div>
         <div class="finance__visual">
-          <PhoneFrame :src="statsUrl" alt="Estadísticas de gastos de FlatMate" accent="green" />
+          <PhoneFrame :src="statsUrl" alt="Estadísticas de gastos de Roomate" accent="green" />
         </div>
       </div>
     </div>

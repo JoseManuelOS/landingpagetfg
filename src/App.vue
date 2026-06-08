@@ -18,7 +18,7 @@ import { useScrollAnimations } from '@/composables/useScrollAnimations'
 useLenisScroll()
 useScrollAnimations()
 
-const marqueeItems = ['FlatMate', 'Flutter', 'Supabase', 'IA', 'OCR', 'Stripe', 'Firebase', 'RLS']
+const marqueeItems = ['Roomate', 'Flutter', 'Supabase', 'IA', 'OCR', 'Stripe', 'Firebase', 'RLS']
 </script>
 
 <template>

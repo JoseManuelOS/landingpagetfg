@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PhoneFrame from '@/components/PhoneFrame.vue'
-import tasksUrl from '@/assets/flatmate/screen_tareas.png'
+import tasksUrl from '@/assets/roomate/screen_tareas.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,7 +43,7 @@ const timeline = [
 
       <div class="tasks__grid">
         <div class="tasks__visual">
-          <PhoneFrame :src="tasksUrl" alt="Pantalla de tareas de FlatMate" accent="indigo" />
+          <PhoneFrame :src="tasksUrl" alt="Pantalla de tareas de Roomate" accent="indigo" />
         </div>
         <div class="tasks__copy">
           <p class="lead reveal">

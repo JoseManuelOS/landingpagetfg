@@ -1,7 +1,7 @@
 import { onBeforeUnmount, onMounted, shallowRef, type Ref } from 'vue'
-import inicioUrl from '@/assets/flatmate/screen_inicio.png'
-import finanzasUrl from '@/assets/flatmate/screen_finanzas.png'
-import tareasUrl from '@/assets/flatmate/screen_tareas.png'
+import inicioUrl from '@/assets/roomate/screen_inicio.png'
+import finanzasUrl from '@/assets/roomate/screen_finanzas.png'
+import tareasUrl from '@/assets/roomate/screen_tareas.png'
 
 interface Options {
   canvas: Readonly<Ref<HTMLCanvasElement | null>>

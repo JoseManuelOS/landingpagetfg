@@ -3,10 +3,10 @@ import { onMounted, onUnmounted, shallowRef, useTemplateRef } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PhoneFrame from '@/components/PhoneFrame.vue'
-import inicioUrl from '@/assets/flatmate/screen_inicio.png'
-import financeUrl from '@/assets/flatmate/screen_finanzas.png'
-import tasksUrl from '@/assets/flatmate/screen_tareas.png'
-import iaUrl from '@/assets/flatmate/screen_ia.png'
+import inicioUrl from '@/assets/roomate/screen_inicio.png'
+import financeUrl from '@/assets/roomate/screen_finanzas.png'
+import tasksUrl from '@/assets/roomate/screen_tareas.png'
+import iaUrl from '@/assets/roomate/screen_ia.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,7 +18,7 @@ const chapters = [
     text: 'Balance, tareas y actividad compartida visibles desde el primer vistazo.',
     stat: '1 espacio común',
     src: inicioUrl,
-    alt: 'Inicio del hogar en FlatMate',
+    alt: 'Inicio del hogar en Roomate',
     accent: 'cyan' as const,
   },
   {
@@ -28,7 +28,7 @@ const chapters = [
     text: 'Registra gastos, reparte importes y simplifica deudas sin hojas de cálculo.',
     stat: '192,34 EUR en abril',
     src: financeUrl,
-    alt: 'Finanzas compartidas en FlatMate',
+    alt: 'Finanzas compartidas en Roomate',
     accent: 'green' as const,
   },
   {
@@ -38,7 +38,7 @@ const chapters = [
     text: 'Tareas con prioridad, persona asignada y fecha para que acuerdos se cumplan.',
     stat: 'Responsabilidad visible',
     src: tasksUrl,
-    alt: 'Gestion de tareas en FlatMate',
+    alt: 'Gestion de tareas en Roomate',
     accent: 'indigo' as const,
   },
   {
@@ -46,9 +46,9 @@ const chapters = [
     eyebrow: 'IA y seguridad',
     title: 'Pregunta. Escanea. Decide.',
     text: 'OCR transforma tickets en gastos; IA interpreta hogar; RLS aísla cada grupo.',
-    stat: 'RoomMate IA · chat',
+    stat: 'Roomate IA · chat',
     src: iaUrl,
-    alt: 'Asistente RoomMate IA de FlatMate',
+    alt: 'Asistente Roomate IA de Roomate',
     accent: 'cyan' as const,
   },
 ] as const
@@ -97,7 +97,7 @@ onUnmounted(() => context?.revert())
 <template>
   <section id="story" ref="root" class="story section--story" data-section="story">
     <header class="story__intro">
-      <p class="story__kicker">La experiencia FlatMate</p>
+      <p class="story__kicker">La experiencia Roomate</p>
       <h2 class="story__heading">Compartir piso.<br />Ahora se siente simple.</h2>
     </header>
 

@@ -10,7 +10,7 @@ const items = [
   },
   {
     title: 'Deudas confusas',
-    description: 'Quién debe a quién acaba siendo discusión. FlatMate calcula y simplifica con un algoritmo.',
+    description: 'Quién debe a quién acaba siendo discusión. Roomate calcula y simplifica con un algoritmo.',
     accent: 'green' as const,
     icon: '⇄',
   },
@@ -53,7 +53,7 @@ const scatter = [
 
         <aside class="problem__aside reveal">
           <p class="lead">
-            FlatMate une finanzas, responsabilidades y comunicación en un espacio común por hogar.
+            Roomate une finanzas, responsabilidades y comunicación en un espacio común por hogar.
           </p>
           <ul class="problem__scatter" aria-label="El caos actual">
             <li v-for="(s, i) in scatter" :key="s.text" :class="`problem__chip problem__chip--${i}`">

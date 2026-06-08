@@ -1,8 +1,8 @@
-# Plan landing page TFG FlatMate
+# Plan landing page TFG Roomate
 
 ## Resumen del producto
 
-FlatMate es una app Flutter para pisos compartidos. Centraliza finanzas, tareas y convivencia: gastos compartidos, deudas simplificadas, presupuestos, suscripciones, pagos, lista de la compra, chat, notificaciones, analisis con IA, OCR de tickets y exportacion PDF.
+Roomate es una app Flutter para pisos compartidos. Centraliza finanzas, tareas y convivencia: gastos compartidos, deudas simplificadas, presupuestos, suscripciones, pagos, lista de la compra, chat, notificaciones, analisis con IA, OCR de tickets y exportacion PDF.
 
 La landing debe vender el TFG como producto real y como proyecto tecnico solido. Debe explicar rapido que problema resuelve, mostrar pantallas reales y transmitir una sensacion moderna parecida al portfolio: scroll suave, animaciones por seccion, cards con reveal, textos tecnicos con efecto flicker y transiciones cuidadas.
 
@@ -22,7 +22,7 @@ La landing debe vender el TFG como producto real y como proyecto tecnico solido.
 
 ## Assets reutilizables
 
-Usar assets reales del TFG, enlazados desde la landing con rutas relativas al repo raiz del monorepo o copiandolos a `landingpage/src/assets/flatmate/` durante la implementacion.
+Usar assets reales del TFG, enlazados desde la landing con rutas relativas al repo raiz del monorepo o copiandolos a `landingpage/src/assets/roomate/` durante la implementacion.
 
 | Asset | Uso recomendado |
 | --- | --- |
@@ -48,7 +48,7 @@ Estructura recomendada:
 landingpage/
   src/
     assets/
-      flatmate/
+      roomate/
     components/
       AppHeader.vue
       AppearingText.vue
@@ -78,7 +78,7 @@ landingpage/
 
 ## Direccion visual
 
-La identidad debe partir de FlatMate, no del portfolio copiado literalmente.
+La identidad debe partir de Roomate, no del portfolio copiado literalmente.
 
 Paleta:
 
@@ -109,7 +109,7 @@ Objetivo: que en 5 segundos se entienda marca, utilidad y calidad visual.
 
 Contenido:
 
-- H1: `FlatMate`.
+- H1: `Roomate`.
 - Claim: `Gastos, tareas y convivencia de piso en una sola app.`
 - Copy: `Controla quien paga, que falta por hacer y como evoluciona el mes con IA, OCR y finanzas compartidas.`
 - CTA principal: `Ver proyecto`. // URL placeholder hasta confirmar repositorio público y memoria final
@@ -131,7 +131,7 @@ Objetivo: explicar dolor real.
 Copy preliminar:
 
 - Problema: `En un piso compartido, los gastos, tareas y pagos acaban repartidos entre chats, notas y memoria.`
-- Solucion: `FlatMate une finanzas, responsabilidades y comunicacion en un espacio comun por hogar.`
+- Solucion: `Roomate une finanzas, responsabilidades y comunicacion en un espacio comun por hogar.`
 
 Bloques:
 
@@ -172,7 +172,7 @@ Animacion:
 
 ### 4. Tareas y convivencia
 
-Objetivo: ampliar FlatMate mas alla de gastos.
+Objetivo: ampliar Roomate mas alla de gastos.
 
 Visual: `screen_tareas.png`.
 
@@ -209,7 +209,7 @@ Contenido:
 
 Copy:
 
-`FlatMate no solo guarda datos: ayuda a interpretarlos y reduce trabajo manual.`
+`Roomate no solo guarda datos: ayuda a interpretarlos y reduce trabajo manual.`
 
 Animacion:
 
@@ -276,7 +276,7 @@ Objetivo: finalizar con accion clara.
 
 Contenido:
 
-- `FlatMate demuestra producto, backend seguro y experiencia mobile completa.`
+- `Roomate demuestra producto, backend seguro y experiencia mobile completa.`
 - CTA: `Ver repositorio`. // URL placeholder hasta confirmar repositorio público y memoria final
 - CTA: `Descargar memoria`. // URL placeholder hasta confirmar repositorio público y memoria final
 - CTA: `Contactar`. // URL placeholder hasta confirmar repositorio público y memoria final
@@ -356,7 +356,7 @@ Reduced motion:
 
 - Crear proyecto Vite si `landingpage` aun solo tiene README.
 - Instalar dependencias: `vue`, `typescript`, `vite`, `sass`, `gsap`, `lenis`, opcional `three`.
-- Copiar assets de TFG a `landingpage/src/assets/flatmate/` (no importar desde `../tfg/`, ese dir es read-only y los assets deben vivir dentro del root del proyecto landingpage para el bundler).
+- Copiar assets de TFG a `landingpage/src/assets/roomate/` (no importar desde `../tfg/`, ese dir es read-only y los assets deben vivir dentro del root del proyecto landingpage para el bundler).
 - Definir variables SCSS de colores, spacing, radius, typography y z-index.
 - Implementar componentes base: header, phone mockup, badge tecnico, feature card, section band.
 - Implementar secciones en `App.vue`.
@@ -371,7 +371,7 @@ Reduced motion:
 
 Responsive:
 
-- Hero muestra `FlatMate` y mockup visible en primer viewport.
+- Hero muestra `Roomate` y mockup visible en primer viewport.
 - En mobile no hay texto cortado ni botones desbordados.
 - Screenshots mantienen aspect ratio y no tapan copy.
 - Se ve una pista de la siguiente seccion bajo hero.
@@ -403,10 +403,10 @@ Build:
 
 ## Criterios de aceptacion
 
-- Landing comunica que FlatMate resuelve finanzas y convivencia de pisos compartidos.
+- Landing comunica que Roomate resuelve finanzas y convivencia de pisos compartidos.
 - Primer viewport contiene marca, claim y visual real de producto.
 - Animaciones recuerdan al portfolio: suaves, por scroll, con reveals y detalles tipo flicker/banner.
-- Identidad visual pertenece a FlatMate: oscura, tecnica, con acentos indigo/cyan/verde/ambar.
+- Identidad visual pertenece a Roomate: oscura, tecnica, con acentos indigo/cyan/verde/ambar.
 - Evaluador tecnico entiende stack, seguridad y alcance del TFG.
 - Usuario no tecnico entiende problema y beneficio.
 
